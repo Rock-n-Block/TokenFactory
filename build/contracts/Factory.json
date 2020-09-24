@@ -1,0 +1,135 @@
+{
+  "contractName": "Factory",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/D/Download/TokenFactory/contracts/TokenFactory.sol\":\"Factory\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/Download/TokenFactory/contracts/TokenFactory.sol\":{\"keccak256\":\"0x53d1d63087152c73ce170a949c04cb0e9c482361d0945a64f4106798a7d0538e\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5a05f9702e37a4f03adac0bc4e2f1f63ff603d7e7cdd09819cac3e5978fa2ef2\",\"dweb:/ipfs/QmbFN5B5wCxQrLoruwUJR4iKiyh6zTB7Mc7ZDyMHey6M8g\"]},\"/D/Download/TokenFactory/contracts/Tokens/init.sol\":{\"keccak256\":\"0x3dd64e2b0bb614c0609cfc780daf798895f2644e61c397a6f6044a478c10dddd\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://198b97a7be2b8e1586c236a18172040097de365ad278cde5db92fb4630d365e7\",\"dweb:/ipfs/QmPdbtrzK3UXe2PLbq5t75PYU5ADwDJfL4XL7b44Gyzu4y\"]},\"/D/Download/TokenFactory/contracts/Tokens/token0.sol\":{\"keccak256\":\"0xd3101d6e685ebb0f717259bab1371254902a1090249bedce4b9581002163a215\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4c2b3b003dd17f4083376ba6baee1bbe9e0478eda6bfae7a2507d4d225e17dd6\",\"dweb:/ipfs/QmV46byYhHMpySBA5jcAiqwbg9uyW4cHqgcv1YmLLF5Pxg\"]},\"/D/Download/TokenFactory/contracts/Tokens/tokenB.sol\":{\"keccak256\":\"0x9217c50fce212675a8a5d88a2eef30955920ca9a557d267d4eb8c48de07b6f71\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://62c7c7379cf50d0fdc0a7bfb6c595d0a380f65cd67f0796355c9c29b0c02ba60\",\"dweb:/ipfs/QmV1NBoDbzk9og7kC5aRAbFMhsTXWhaKVZJeUVUtWKKuix\"]},\"/D/Download/TokenFactory/contracts/Tokens/tokenC.sol\":{\"keccak256\":\"0x1b38e897885310e806afbfdeca944b97d87ffba73405d152b1068b9e2be09ff9\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://62fb1f4d4f4a0063971a7e6a89d729d65de637174f4bdae3a3cc09107e828c94\",\"dweb:/ipfs/QmVm1DAek68Wc3s7VTEARBcc5WnHHhUcxyQydLXLpPkYSx\"]},\"/D/Download/TokenFactory/contracts/Tokens/tokenP.sol\":{\"keccak256\":\"0x068df5113739756734737553993c6c7a80df354604a13e32f0738ba863ec626d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://15a71eaf109f7efc82f4434c0ece290e34610d7a6cfa30aa9f2f1873bd6f3334\",\"dweb:/ipfs/QmSy6g1mWxp6Jnsp5UcKZ6UZwvGEyjxx5B2sjhU373G9Kf\"]},\"/D/Download/TokenFactory/contracts/Tokens/tokenS.sol\":{\"keccak256\":\"0xb83b5574bdc59eebf250654d317102f0ddaac656da1cda054ea0822442d39786\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://accee839c29a2b0f25e2600429176951a9f41a983242472fbbbabe3094aa11e2\",\"dweb:/ipfs/QmUw3rzcjoRP6RYix9G2mQpfJM7Pa7tkM3qh3KSze41Auw\"]},\"openzeppelin-solidity/contracts/GSN/Context.sol\":{\"keccak256\":\"0xdb26cbf4d028490f49831a7865c2fe1b28db44b535ca8d343785a3b768aae183\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://840b14ce0315c47d49ba328f1f9fa7654ded1c9e1559e6c5e777a7b2dc28bf0a\",\"dweb:/ipfs/QmTLLabn4wcfGro9LEmUXUN2nwKqZSotXMvjDCLXEnLtZP\"]},\"openzeppelin-solidity/contracts/access/Ownable.sol\":{\"keccak256\":\"0x4bd6402ca6b3419008c2b482aff54e66836e8cb4eba2680e42ac5884ae6424fc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8f9f711fb8d0d92aeea1c327e3845d13ca1fa8f142e47f8723cd5b3106fb29a3\",\"dweb:/ipfs/QmVQUReDW9f4zGqhizwHnyU8EntMs95tbASdqkGncnikba\"]},\"openzeppelin-solidity/contracts/math/Math.sol\":{\"keccak256\":\"0x6c234834003dfb86e2c23d12dfdde7cc01e78013d71b52162cb308b4873562cb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f0e3f39b2ec26694a42c89a5d9e489d5228f1880fcf5e375c5c975ba816e5ffe\",\"dweb:/ipfs/QmUErheHopnbBUSLDQAtWsmw6HsEvqTNp1QiBEuSJhmhHn\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x9a9cf02622cd7a64261b10534fc3260449da25c98c9e96d1b4ae8110a20e5806\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2df142592d1dc267d9549049ee3317fa190d2f87eaa565f86ab05ec83f7ab8f5\",\"dweb:/ipfs/QmSkJtcfWo7c42KnL5hho6GFxK6HRNV91XABx1P7xDtfLV\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x91e0bd6a6762d2a1700dab0849de8422611355100576c4beef1e80d82a4104a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://73bbd77af0a8b07255d2ffa20728bcf13b116007c9ddac5d37046cfabb0e1e02\",\"dweb:/ipfs/QmRgZgWCWCSMTTaok6o4QvWA6MgB4goS8qpb3sN7bAvaZ9\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol\":{\"keccak256\":\"0x657b0d90be17331364211d74359df2a734fac864f6e88c80de7626fa33090ffb\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://09cca25fefa2354a424d55a97930c76b11dc50697ba62c85d7affc27a37e830c\",\"dweb:/ipfs/QmPTQBYXxQDSNmMKqwe4WnM8E7NwnpLnkFLSRH8hZRvrVK\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Capped.sol\":{\"keccak256\":\"0x4e441884fd304b10cad51a91437fcb31db51a3b1281f62639a730762b2ed438c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dd0a406ef27d19f1910c3047e9e59c099a83bb7047876df2cefbeed650b5a014\",\"dweb:/ipfs/QmUzgu9XWdeJVBXYsT8ruhqw3rwXSMGjCEbzrFCRTmoQFQ\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Pausable.sol\":{\"keccak256\":\"0xbab4a97af2a6810a8ffc187205dfb331284949ea5b30caa5b9052828853bb149\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f53c98e31ed415c2a6f03d99809cd4f2f5fff92a13ee85022922a09df82ee459\",\"dweb:/ipfs/QmXiv4ysuQSRfoXqPpwA1QCreEnqfkrHDGyJTmifoni7dK\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Snapshot.sol\":{\"keccak256\":\"0x9d0994510d5ab78e7c98ba0d66f301282265f838ce5a1f020af8abcd88f6cf19\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d06c94ae10a899e1462b751ca2f229ea36756587f5307f452c33a64318718e85\",\"dweb:/ipfs/QmcVKfyEzXx73YfdoVhBuDvEqi9NztHUSG4AvvS5deX64p\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x5c26b39d26f7ed489e555d955dcd3e01872972e71fdd1528e93ec164e4f23385\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://efdc632af6960cf865dbc113665ea1f5b90eab75cc40ec062b2f6ae6da582017\",\"dweb:/ipfs/QmfAZFDuG62vxmAN9DnXApv7e7PMzPqi4RkqqZHLMSQiY5\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf5fa8cbdffa5ef8be49b246b5628facc30b71707e78a45d80d93b64eff3fe390\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://774e78a9ff32792cc95db4d2ceaf3a7965bb7f0bea5e6cb7cff182b450d44b37\",\"dweb:/ipfs/QmRRMC4uj7eAcLW7chynA3sNEYULMFazdLwQHKHQPyzAbA\"]},\"openzeppelin-solidity/contracts/utils/Arrays.sol\":{\"keccak256\":\"0xa3f49fd9a59196fcecb87430c1793db7e1060c13f76a85137c665a21eb13df80\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ecc2763f5540da827608f1a8d5adc01d509b559b1bf24bb838c1d2c396866beb\",\"dweb:/ipfs/QmVtWVtUtR3DifrC2AQbS428yoWzUHUqsh9cgqt6N8EJok\"]},\"openzeppelin-solidity/contracts/utils/Counters.sol\":{\"keccak256\":\"0x2d68b8e6425249cd05cc0a66ea50cb5b8d10cbdac59c6de834e1002232813faf\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e3ce6b6ac17c67bba01e9c8c778f82f68fd4823bd083359cdd03040b70eeeba3\",\"dweb:/ipfs/QmX4t1jWwKaAkacvmQxEG5rBtLXg3EHw6pRjKhMZR8iw3n\"]},\"openzeppelin-solidity/contracts/utils/Pausable.sol\":{\"keccak256\":\"0x5d1b1dcbc0396f44c1c8d554857f71e3187503bf1e54062bf9ec6782e21f3a08\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://9aa7fa580393aab7ca3d9f606f5ab7434d51e1c0f3632a593fca82c80ef8cc4c\",\"dweb:/ipfs/QmRy84N7QfkwBM2AeR7UB5G1PPHdRLi6s1iyzAwCzevcHe\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.6.0;\r\n\r\nimport \"./Tokens/init.sol\";\r\n\r\nabstract contract Factory\r\n{\r\n\r\n}",
+  "sourcePath": "D:/Download/TokenFactory/contracts/TokenFactory.sol",
+  "ast": {
+    "absolutePath": "/D/Download/TokenFactory/contracts/TokenFactory.sol",
+    "exportedSymbols": {
+      "Factory": [
+        36
+      ]
+    },
+    "id": 37,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 34,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:1"
+      },
+      {
+        "absolutePath": "/D/Download/TokenFactory/contracts/Tokens/init.sol",
+        "file": "./Tokens/init.sol",
+        "id": 35,
+        "nodeType": "ImportDirective",
+        "scope": 37,
+        "sourceUnit": 44,
+        "src": "60:27:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 36,
+        "linearizedBaseContracts": [
+          36
+        ],
+        "name": "Factory",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 37,
+        "src": "91:33:1"
+      }
+    ],
+    "src": "33:91:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/D/Download/TokenFactory/contracts/TokenFactory.sol",
+    "exportedSymbols": {
+      "Factory": [
+        36
+      ]
+    },
+    "id": 37,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 34,
+        "literals": [
+          "solidity",
+          "^",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "33:23:1"
+      },
+      {
+        "absolutePath": "/D/Download/TokenFactory/contracts/Tokens/init.sol",
+        "file": "./Tokens/init.sol",
+        "id": 35,
+        "nodeType": "ImportDirective",
+        "scope": 37,
+        "sourceUnit": 44,
+        "src": "60:27:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 36,
+        "linearizedBaseContracts": [
+          36
+        ],
+        "name": "Factory",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 37,
+        "src": "91:33:1"
+      }
+    ],
+    "src": "33:91:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.5",
+  "updatedAt": "2020-09-24T15:45:28.086Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
