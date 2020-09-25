@@ -63,10 +63,8 @@ contract TokenFactoryMain is Ownable
         address tokenOwner
     )
     public
-    payable
     returns (address newToken)
     {
-        wallet.transfer(msg.value);
         if (isSingle_B_C(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactorySingle_B_C_addr.createToken(name,
                                                                    symbol,
