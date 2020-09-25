@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
+import "openzeppelin-solidity/contracts/access/Ownable.sol";
+
 import "./TokenFactorySingle_B_C.sol";
 import "./TokenFactorySingle_other.sol";
 import "./TokenFactoryDouble_B.sol";
@@ -9,7 +11,7 @@ import "./TokenFactoryTriple_1.sol";
 import "./TokenFactoryTriple_2.sol";
 import "./TokenFactoryForth.sol";
 
-contract TokenFactoryMain
+contract TokenFactoryMain is Ownable
 {
     TokenFactorySingle_B_C    public TokenFactorySingle_B_C_addr;
     TokenFactorySingle_other  public TokenFactorySingle_other_addr;
@@ -42,6 +44,10 @@ contract TokenFactoryMain
         TokenFactoryTriple_1_addr = _TokenFactoryTriple_1_addr;
         TokenFactoryTriple_2_addr = _TokenFactoryTriple_2_addr;
         TokenFactoryForth_addr = _TokenFactoryForth_addr;
+    }
+
+    function changeWalet(address payable newWallet) public onlyOwner{
+        wallet = newWallet;
     }
 
     function createToken
