@@ -27,17 +27,30 @@ contract TokenFactorySingle_other is Ownable
         string memory symbol,
         uint8 decimals,
         bool isSnapshot,
-        bool isPausable
+        bool isPausable,
+        address tokenOwner
     )
     public
     onlyMain
     returns (address newToken)
     {
         if (isSnapshot == true)
-            return address(new tokenS(name, symbol, decimals));
+        {
+            tokenS token = new tokenS(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else if (isPausable == true)
-            return address(new tokenP(name, symbol, decimals));
+        {
+            tokenP token = new tokenP(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else
-            return address(new token0(name, symbol, decimals));
+        {
+            token0 token = new token0(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
     }
 }

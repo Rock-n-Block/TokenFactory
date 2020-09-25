@@ -49,7 +49,8 @@ contract TokenFactoryMain
         bool isCapped,
         uint256 cap,
         bool isSnapshot,
-        bool isPausable
+        bool isPausable,
+        address tokenOwner
     )
     public
     returns (address newToken)
@@ -60,13 +61,15 @@ contract TokenFactoryMain
                                                                    decimals,
                                                                    isBurnable,
                                                                    isCapped,
-                                                                   cap));
+                                                                   cap,
+                                                                   tokenOwner));
         if (isSingle_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactorySingle_other_addr.createToken(name,
                                                                      symbol,
                                                                      decimals,
                                                                      isSnapshot,
-                                                                     isPausable));
+                                                                     isPausable,
+                                                                     tokenOwner));
         if (isDouble_B(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactoryDouble_B_addr.createToken(name,
                                                                  symbol,
@@ -75,7 +78,8 @@ contract TokenFactoryMain
                                                                  isCapped,
                                                                  cap,
                                                                  isSnapshot,
-                                                                 isPausable));
+                                                                 isPausable,
+                                                                 tokenOwner));
         if (isDouble_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactoryDouble_other_addr.createToken(name,
                                                                      symbol,
@@ -83,7 +87,8 @@ contract TokenFactoryMain
                                                                      isCapped,
                                                                      cap,
                                                                      isSnapshot,
-                                                                     isPausable));
+                                                                     isPausable,
+                                                                     tokenOwner));
         if (isTriple_1(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactoryTriple_1_addr.createToken(name,
                                                                  symbol,
@@ -92,7 +97,8 @@ contract TokenFactoryMain
                                                                  isCapped,
                                                                  cap,
                                                                  isSnapshot,
-                                                                 isPausable));
+                                                                 isPausable,
+                                                                 tokenOwner));
         if (isTriple_2(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactoryTriple_2_addr.createToken(name,
                                                                  symbol,
@@ -101,12 +107,14 @@ contract TokenFactoryMain
                                                                  isCapped,
                                                                  cap,
                                                                  isSnapshot,
-                                                                 isPausable));
+                                                                 isPausable,
+                                                                 tokenOwner));
         if (isForth(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactoryForth_addr.createToken(name,
                                                               symbol,
                                                               decimals,
-                                                              cap));
+                                                              cap,
+                                                              tokenOwner));
     }
 
     function isSingle_B_C

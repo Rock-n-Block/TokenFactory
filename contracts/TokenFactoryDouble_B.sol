@@ -30,7 +30,8 @@ contract TokenFactoryDouble_B is Ownable
         bool isCapped,
         uint256 cap,
         bool isSnapshot,
-        bool isPausable
+        bool isPausable,
+        address tokenOwner
     )
     public
     onlyMain
@@ -38,12 +39,24 @@ contract TokenFactoryDouble_B is Ownable
     {
         if (isBurnable == true &&
             isCapped   == true)
-            return address(new tokenBC(name, symbol, decimals, cap));
+        {
+            tokenBC token = new tokenBC(name, symbol, decimals, cap);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else if (isBurnable == true &&
                  isSnapshot == true)
-            return address(new tokenBS(name, symbol, decimals));
+        {
+            tokenBS token = new tokenBS(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else if (isBurnable == true &&
                  isPausable == true)
-            return address(new tokenBP(name, symbol, decimals));
+        {
+            tokenBP token = new tokenBP(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
     }
 }

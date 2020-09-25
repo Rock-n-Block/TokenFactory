@@ -30,7 +30,8 @@ contract TokenFactoryTriple_1 is Ownable
         bool isCapped,
         uint256 cap,
         bool isSnapshot,
-        bool isPausable
+        bool isPausable,
+        address tokenOwner
     )
     public
     onlyMain
@@ -39,10 +40,18 @@ contract TokenFactoryTriple_1 is Ownable
         if (isBurnable == true &&
             isCapped   == true &&
             isPausable == true)
-            return address(new tokenBCP(name, symbol, decimals, cap));
+        {
+            tokenBCP token = new tokenBCP(name, symbol, decimals, cap);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else if (isBurnable == true &&
                  isCapped   == true &&
                  isSnapshot == true)
-            return address(new tokenBCS(name, symbol, decimals, cap));
+        {
+            tokenBCS token = new tokenBCS(name, symbol, decimals, cap);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
     }
 }

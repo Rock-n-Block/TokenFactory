@@ -28,15 +28,24 @@ contract TokenFactorySingle_B_C is Ownable
         uint8 decimals,
         bool isBurnable,
         bool isCapped,
-        uint256 cap
+        uint256 cap,
+        address tokenOwner
     )
     public
     onlyMain
     returns (address newToken)
     {
         if (isBurnable == true)
-            return address(new tokenB(name, symbol, decimals));
+        {
+            tokenB token = new tokenB(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else if (isCapped   == true)
-            return address(new tokenC(name, symbol, decimals, cap));
+        {
+            tokenC token = new tokenC(name, symbol, decimals, cap);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
     }
 }

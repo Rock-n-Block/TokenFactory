@@ -29,7 +29,8 @@ contract TokenFactoryDouble_other is Ownable
         bool isCapped,
         uint256 cap,
         bool isSnapshot,
-        bool isPausable
+        bool isPausable,
+        address tokenOwner
     )
     public
     onlyMain
@@ -37,11 +38,23 @@ contract TokenFactoryDouble_other is Ownable
     {
         if (isCapped     == true &&
             isPausable   == true)
-            return address(new tokenCP(name, symbol, decimals, cap));
+        {
+            tokenCP token = new tokenCP(name, symbol, decimals, cap);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else if (isCapped     == true &&
                  isSnapshot   == true)
-            return address(new tokenCS(name, symbol, decimals, cap));
+        {
+            tokenCS token = new tokenCS(name, symbol, decimals, cap);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
         else
-            return address(new tokenPS(name, symbol, decimals));
+        {
+            tokenPS token = new tokenPS(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
     }
 }

@@ -26,12 +26,15 @@ contract TokenFactoryForth is Ownable
         string memory name,
         string memory symbol,
         uint8 decimals,
-        uint256 cap
+        uint256 cap,
+        address tokenOwner
     )
     public
     onlyMain
     returns (address newToken)
     {
-        return address(new tokenBCSP(name, symbol, decimals, cap));
+        tokenBCSP token = new tokenBCSP(name, symbol, decimals, cap);
+        token.transferOwnership(tokenOwner);
+        return address(token);
     }
 }
