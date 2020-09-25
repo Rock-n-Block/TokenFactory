@@ -19,8 +19,11 @@ contract TokenFactoryMain
     TokenFactoryTriple_2      public TokenFactoryTriple_2_addr;
     TokenFactoryForth         public TokenFactoryForth_addr;
 
+    address payable public wallet;
+
     constructor
     (
+        address payable _wallet,
         TokenFactorySingle_B_C    _TokenFactorySingle_B_C_addr,
         TokenFactorySingle_other  _TokenFactorySingle_other_addr,
         TokenFactoryDouble_B      _TokenFactoryDouble_B_addr,
@@ -31,6 +34,7 @@ contract TokenFactoryMain
     )
     public
     {
+        wallet = _wallet;
         TokenFactorySingle_B_C_addr = _TokenFactorySingle_B_C_addr;
         TokenFactorySingle_other_addr = _TokenFactorySingle_other_addr;
         TokenFactoryDouble_B_addr = _TokenFactoryDouble_B_addr;
@@ -53,8 +57,10 @@ contract TokenFactoryMain
         address tokenOwner
     )
     public
+    payable
     returns (address newToken)
     {
+        wallet.transfer(msg.value);
         if (isSingle_B_C(isBurnable, isCapped, isSnapshot, isPausable) == true)
             return address(TokenFactorySingle_B_C_addr.createToken(name,
                                                                    symbol,
