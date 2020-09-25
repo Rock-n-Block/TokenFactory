@@ -10,4 +10,9 @@ contract token0 is ERC20, Ownable
     {
         ERC20._setupDecimals(decimals);
     }
+
+    function mintFor(address account, uint256 amount) public onlyOwner
+    {
+        ERC20._mint(account, amount);
+    }
 }
