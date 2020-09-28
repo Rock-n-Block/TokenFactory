@@ -172,6 +172,11 @@ contract TokenFactoryMain is Ownable
             isSnapshot == false &&
             isPausable == true)
             return true;
+        if (isBurnable == false &&
+            isCapped   == false &&
+            isSnapshot == false &&
+            isPausable == false)
+            return true;
         return false;
     }
 
