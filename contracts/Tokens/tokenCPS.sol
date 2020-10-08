@@ -15,6 +15,21 @@ contract tokenCPS is token0, ERC20Capped, ERC20Pausable, ERC20Snapshot
     {
     }
 
+    function pause() public onlyOwner
+    {
+        _pause();
+    }
+
+    function unpause() public onlyOwner
+    {
+        _unpause();
+    }
+
+    function snapshot() public onlyOwner returns (uint256)
+    {
+        return _snapshot();
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
     internal
     virtual

@@ -21,11 +21,8 @@ contract TokenFactoryMain is Ownable
     TokenFactoryTriple_2      public TokenFactoryTriple_2_addr;
     TokenFactoryForth         public TokenFactoryForth_addr;
 
-    address payable public wallet;
-
     constructor
     (
-        address payable _wallet,
         TokenFactorySingle_B_C    _TokenFactorySingle_B_C_addr,
         TokenFactorySingle_other  _TokenFactorySingle_other_addr,
         TokenFactoryDouble_B      _TokenFactoryDouble_B_addr,
@@ -36,7 +33,6 @@ contract TokenFactoryMain is Ownable
     )
     public
     {
-        wallet = _wallet;
         TokenFactorySingle_B_C_addr = _TokenFactorySingle_B_C_addr;
         TokenFactorySingle_other_addr = _TokenFactorySingle_other_addr;
         TokenFactoryDouble_B_addr = _TokenFactoryDouble_B_addr;
@@ -46,9 +42,7 @@ contract TokenFactoryMain is Ownable
         TokenFactoryForth_addr = _TokenFactoryForth_addr;
     }
 
-    function changeWalet(address payable newWallet) public onlyOwner{
-        wallet = newWallet;
-    }
+    event createdToken(address newToken);
 
     function createToken
     (
@@ -58,73 +52,77 @@ contract TokenFactoryMain is Ownable
         bool isBurnable,
         bool isCapped,
         uint256 cap,
-        bool isSnapshot,
         bool isPausable,
+        bool isSnapshot,
         address tokenOwner
     )
     public
     returns (address newToken)
     {
+        newToken = address(0);
         if (isSingle_B_C(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactorySingle_B_C_addr.createToken(name,
-                                                                   symbol,
-                                                                   decimals,
-                                                                   isBurnable,
-                                                                   isCapped,
-                                                                   cap,
-                                                                   tokenOwner));
-        if (isSingle_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactorySingle_other_addr.createToken(name,
+            newToken = address(TokenFactorySingle_B_C_addr.createToken(name,
+                                                                       symbol,
+                                                                       decimals,
+                                                                       isBurnable,
+                                                                       isCapped,
+                                                                       cap,
+                                                                       tokenOwner));
+        else if (isSingle_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactorySingle_other_addr.createToken(name,
+                                                                         symbol,
+                                                                         decimals,
+                                                                         isSnapshot,
+                                                                         isPausable,
+                                                                         tokenOwner));
+        else if (isDouble_B(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryDouble_B_addr.createToken(name,
                                                                      symbol,
                                                                      decimals,
-                                                                     isSnapshot,
-                                                                     isPausable,
-                                                                     tokenOwner));
-        if (isDouble_B(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactoryDouble_B_addr.createToken(name,
-                                                                 symbol,
-                                                                 decimals,
-                                                                 isBurnable,
-                                                                 isCapped,
-                                                                 cap,
-                                                                 isSnapshot,
-                                                                 isPausable,
-                                                                 tokenOwner));
-        if (isDouble_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactoryDouble_other_addr.createToken(name,
-                                                                     symbol,
-                                                                     decimals,
+                                                                     isBurnable,
                                                                      isCapped,
                                                                      cap,
                                                                      isSnapshot,
                                                                      isPausable,
                                                                      tokenOwner));
-        if (isTriple_1(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactoryTriple_1_addr.createToken(name,
-                                                                 symbol,
-                                                                 decimals,
-                                                                 isBurnable,
-                                                                 isCapped,
-                                                                 cap,
-                                                                 isSnapshot,
-                                                                 isPausable,
-                                                                 tokenOwner));
-        if (isTriple_2(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactoryTriple_2_addr.createToken(name,
-                                                                 symbol,
-                                                                 decimals,
-                                                                 isBurnable,
-                                                                 isCapped,
-                                                                 cap,
-                                                                 isSnapshot,
-                                                                 isPausable,
-                                                                 tokenOwner));
-        if (isForth(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            return address(TokenFactoryForth_addr.createToken(name,
-                                                              symbol,
-                                                              decimals,
-                                                              cap,
-                                                              tokenOwner));
+        else if (isDouble_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryDouble_other_addr.createToken(name,
+                                                                         symbol,
+                                                                         decimals,
+                                                                         isCapped,
+                                                                         cap,
+                                                                         isSnapshot,
+                                                                         isPausable,
+                                                                         tokenOwner));
+        else if (isTriple_1(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryTriple_1_addr.createToken(name,
+                                                                     symbol,
+                                                                     decimals,
+                                                                     isBurnable,
+                                                                     isCapped,
+                                                                     cap,
+                                                                     isSnapshot,
+                                                                     isPausable,
+                                                                     tokenOwner));
+        else if (isTriple_2(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryTriple_2_addr.createToken(name,
+                                                                     symbol,
+                                                                     decimals,
+                                                                     isBurnable,
+                                                                     isCapped,
+                                                                     cap,
+                                                                     isSnapshot,
+                                                                     isPausable,
+                                                                     tokenOwner));
+        else if (isForth(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryForth_addr.createToken(name,
+                                                                  symbol,
+                                                                  decimals,
+                                                                  cap,
+                                                                  tokenOwner));
+        require(newToken != address(0));
+        emit createdToken(newToken);
+        return newToken;
     }
 
     function isSingle_B_C
@@ -138,6 +136,11 @@ contract TokenFactoryMain is Ownable
     pure
     returns (bool)
     {
+        if (isBurnable == false &&
+            isCapped   == false &&
+            isSnapshot == false &&
+            isPausable == false)
+            return true;
         if (isBurnable == true  &&
             isCapped   == false &&
             isSnapshot == false &&

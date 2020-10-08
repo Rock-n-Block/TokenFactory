@@ -47,5 +47,11 @@ contract TokenFactorySingle_B_C is Ownable
             token.transferOwnership(tokenOwner);
             return address(token);
         }
+        else
+        {
+            token0 token = new token0(name, symbol, decimals);
+            token.transferOwnership(tokenOwner);
+            return address(token);
+        }
     }
 }

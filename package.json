@@ -1,0 +1,31 @@
+{
+  "name": "TokenFactory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.1",
+    "bn.js": "^5.1.3",
+    "chai": "^4.2.0",
+    "chai-bn": "^0.2.1",
+    "openzeppelin-solidity": "^3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rock-n-Block/TokenFactory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rock-n-Block/TokenFactory/issues"
+  },
+  "homepage": "https://github.com/Rock-n-Block/TokenFactory#readme"
+}

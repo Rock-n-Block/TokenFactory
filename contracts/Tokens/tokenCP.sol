@@ -14,6 +14,16 @@ contract tokenCP is token0, ERC20Capped, ERC20Pausable
     {
     }
 
+    function pause() public onlyOwner
+    {
+        _pause();
+    }
+
+    function unpause() public onlyOwner
+    {
+        _unpause();
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
     internal
     virtual
