@@ -3,43 +3,55 @@ pragma solidity ^0.6.0;
 
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
-import "./TokenFactorySingle_B_C.sol";
-import "./TokenFactorySingle_other.sol";
-import "./TokenFactoryDouble_B.sol";
-import "./TokenFactoryDouble_other.sol";
-import "./TokenFactoryTriple_1.sol";
-import "./TokenFactoryTriple_2.sol";
+import "./TokenFactorySingleBC.sol";
+import "./TokenFactorySingleOther.sol";
+import "./TokenFactoryDoubleB.sol";
+import "./TokenFactoryDoubleOther.sol";
+import "./TokenFactoryTriple1.sol";
+import "./TokenFactoryTriple2.sol";
 import "./TokenFactoryForth.sol";
+import "./MedianOracle.sol";
 
 contract TokenFactoryMain is Ownable
 {
-    TokenFactorySingle_B_C    public TokenFactorySingle_B_C_addr;
-    TokenFactorySingle_other  public TokenFactorySingle_other_addr;
-    TokenFactoryDouble_B      public TokenFactoryDouble_B_addr;
-    TokenFactoryDouble_other  public TokenFactoryDouble_other_addr;
-    TokenFactoryTriple_1      public TokenFactoryTriple_1_addr;
-    TokenFactoryTriple_2      public TokenFactoryTriple_2_addr;
-    TokenFactoryForth         public TokenFactoryForth_addr;
+    using SafeMath for uint256;
+
+    TokenFactorySingleBC    public TokenFactorySingleBCAddr;
+    TokenFactorySingleOther public TokenFactorySingleOtherAddr;
+    TokenFactoryDoubleB     public TokenFactoryDoubleBAddr;
+    TokenFactoryDoubleOther public TokenFactoryDoubleOtherAddr;
+    TokenFactoryTriple1     public TokenFactoryTriple1Addr;
+    TokenFactoryTriple2     public TokenFactoryTriple2Addr;
+    TokenFactoryForth       public TokenFactoryForthAddr;
+    IOracle                 public MedianOracleAddr;
+    address payable         public feeWallet;
+    uint256                 public usdCost;
 
     constructor
     (
-        TokenFactorySingle_B_C    _TokenFactorySingle_B_C_addr,
-        TokenFactorySingle_other  _TokenFactorySingle_other_addr,
-        TokenFactoryDouble_B      _TokenFactoryDouble_B_addr,
-        TokenFactoryDouble_other  _TokenFactoryDouble_other_addr,
-        TokenFactoryTriple_1      _TokenFactoryTriple_1_addr,
-        TokenFactoryTriple_2      _TokenFactoryTriple_2_addr,
-        TokenFactoryForth         _TokenFactoryForth_addr
+        TokenFactorySingleBC    _TokenFactorySingleBCAddr,
+        TokenFactorySingleOther _TokenFactorySingleOtherAddr,
+        TokenFactoryDoubleB     _TokenFactoryDoubleBAddr,
+        TokenFactoryDoubleOther _TokenFactoryDoubleOtherAddr,
+        TokenFactoryTriple1     _TokenFactoryTriple1Addr,
+        TokenFactoryTriple2     _TokenFactoryTriple2Addr,
+        TokenFactoryForth       _TokenFactoryForthAddr,
+        IOracle                 _MedianOracleAddr,
+        address payable         _feeWallet,
+        uint256                 _usdCost
     )
     public
     {
-        TokenFactorySingle_B_C_addr = _TokenFactorySingle_B_C_addr;
-        TokenFactorySingle_other_addr = _TokenFactorySingle_other_addr;
-        TokenFactoryDouble_B_addr = _TokenFactoryDouble_B_addr;
-        TokenFactoryDouble_other_addr = _TokenFactoryDouble_other_addr;
-        TokenFactoryTriple_1_addr = _TokenFactoryTriple_1_addr;
-        TokenFactoryTriple_2_addr = _TokenFactoryTriple_2_addr;
-        TokenFactoryForth_addr = _TokenFactoryForth_addr;
+        TokenFactorySingleBCAddr    = _TokenFactorySingleBCAddr;
+        TokenFactorySingleOtherAddr = _TokenFactorySingleOtherAddr;
+        TokenFactoryDoubleBAddr     = _TokenFactoryDoubleBAddr;
+        TokenFactoryDoubleOtherAddr = _TokenFactoryDoubleOtherAddr;
+        TokenFactoryTriple1Addr     = _TokenFactoryTriple1Addr;
+        TokenFactoryTriple2Addr     = _TokenFactoryTriple2Addr;
+        TokenFactoryForthAddr       = _TokenFactoryForthAddr;
+        MedianOracleAddr            = _MedianOracleAddr;
+        feeWallet                   = _feeWallet;
+        usdCost                     = _usdCost;
     }
 
     event createdToken(address newToken);
@@ -57,26 +69,28 @@ contract TokenFactoryMain is Ownable
         address tokenOwner
     )
     public
+    payable
     returns (address newToken)
     {
+        checkAndTransferFee();
         newToken = address(0);
-        if (isSingle_B_C(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactorySingle_B_C_addr.createToken(name,
+        if (isSingleBC(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactorySingleBCAddr.createToken(name,
                                                                        symbol,
                                                                        decimals,
                                                                        isBurnable,
                                                                        isCapped,
                                                                        cap,
                                                                        tokenOwner));
-        else if (isSingle_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactorySingle_other_addr.createToken(name,
+        else if (isSingleOther(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactorySingleOtherAddr.createToken(name,
                                                                          symbol,
                                                                          decimals,
                                                                          isSnapshot,
                                                                          isPausable,
                                                                          tokenOwner));
-        else if (isDouble_B(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactoryDouble_B_addr.createToken(name,
+        else if (isDoubleB(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryDoubleBAddr.createToken(name,
                                                                      symbol,
                                                                      decimals,
                                                                      isBurnable,
@@ -85,8 +99,8 @@ contract TokenFactoryMain is Ownable
                                                                      isSnapshot,
                                                                      isPausable,
                                                                      tokenOwner));
-        else if (isDouble_other(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactoryDouble_other_addr.createToken(name,
+        else if (isDoubleOther(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryDoubleOtherAddr.createToken(name,
                                                                          symbol,
                                                                          decimals,
                                                                          isCapped,
@@ -94,8 +108,8 @@ contract TokenFactoryMain is Ownable
                                                                          isSnapshot,
                                                                          isPausable,
                                                                          tokenOwner));
-        else if (isTriple_1(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactoryTriple_1_addr.createToken(name,
+        else if (isTriple1(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryTriple1Addr.createToken(name,
                                                                      symbol,
                                                                      decimals,
                                                                      isBurnable,
@@ -104,8 +118,8 @@ contract TokenFactoryMain is Ownable
                                                                      isSnapshot,
                                                                      isPausable,
                                                                      tokenOwner));
-        else if (isTriple_2(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactoryTriple_2_addr.createToken(name,
+        else if (isTriple2(isBurnable, isCapped, isSnapshot, isPausable) == true)
+            newToken = address(TokenFactoryTriple2Addr.createToken(name,
                                                                      symbol,
                                                                      decimals,
                                                                      isBurnable,
@@ -115,7 +129,7 @@ contract TokenFactoryMain is Ownable
                                                                      isPausable,
                                                                      tokenOwner));
         else if (isForth(isBurnable, isCapped, isSnapshot, isPausable) == true)
-            newToken = address(TokenFactoryForth_addr.createToken(name,
+            newToken = address(TokenFactoryForthAddr.createToken(name,
                                                                   symbol,
                                                                   decimals,
                                                                   cap,
@@ -125,7 +139,21 @@ contract TokenFactoryMain is Ownable
         return newToken;
     }
 
-    function isSingle_B_C
+    function checkAndTransferFee() private
+    {
+        uint256 value = msg.value;
+        (uint256 rate, bool validation) = MedianOracleAddr.getData();
+        require(validation == true, "TokenFactoryMain: Couldn't get rate eth/usd from oracle.");
+        require(value * rate >= usdCost, "TokenFactoryMain: Not enough value.");
+        // return USD_COST.mul(TOKEN_AMOUNT).mul(PRICE_PERC).div(ETH_USD_RATE).div(PRICE_DECIMALS);
+        uint256 feeWei = usdCost.mul(10 ** 18).div(rate);
+        feeWallet.transfer(feeWei);
+        uint256 change = msg.value.sub(feeWei);
+        if (change > 0)
+            _msgSender().transfer(change);
+    }
+
+    function isSingleBC
     (
         bool isBurnable,
         bool isCapped,
@@ -154,7 +182,7 @@ contract TokenFactoryMain is Ownable
         return false;
     }
 
-    function isSingle_other
+    function isSingleOther
     (
         bool isBurnable,
         bool isCapped,
@@ -183,7 +211,7 @@ contract TokenFactoryMain is Ownable
         return false;
     }
 
-    function isDouble_B
+    function isDoubleB
     (
         bool isBurnable,
         bool isCapped,
@@ -212,7 +240,7 @@ contract TokenFactoryMain is Ownable
         return false;
     }
 
-    function isDouble_other
+    function isDoubleOther
     (
         bool isBurnable,
         bool isCapped,
@@ -241,7 +269,7 @@ contract TokenFactoryMain is Ownable
         return false;
     }
 
-    function isTriple_1
+    function isTriple1
     (
         bool isBurnable,
         bool isCapped,
@@ -265,7 +293,7 @@ contract TokenFactoryMain is Ownable
         return false;
     }
 
-    function isTriple_2
+    function isTriple2
     (
         bool isBurnable,
         bool isCapped,

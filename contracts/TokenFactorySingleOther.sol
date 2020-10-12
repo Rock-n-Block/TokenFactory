@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-import "./Tokens/initDouble_B.sol";
+import "./Tokens/initSingleOther.sol";
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
 
-contract TokenFactoryDouble_B is Ownable
+contract TokenFactorySingleOther is Ownable
 {
     address public TokenFactoryMain = address(0);
 
@@ -26,9 +26,6 @@ contract TokenFactoryDouble_B is Ownable
         string memory name,
         string memory symbol,
         uint8 decimals,
-        bool isBurnable,
-        bool isCapped,
-        uint256 cap,
         bool isSnapshot,
         bool isPausable,
         address tokenOwner
@@ -37,24 +34,21 @@ contract TokenFactoryDouble_B is Ownable
     onlyMain
     returns (address newToken)
     {
-        if (isBurnable == true &&
-            isCapped   == true)
+        if (isSnapshot == true)
         {
-            tokenBC token = new tokenBC(name, symbol, decimals, cap);
+            tokenS token = new tokenS(name, symbol, decimals);
             token.transferOwnership(tokenOwner);
             return address(token);
         }
-        else if (isBurnable == true &&
-                 isSnapshot == true)
+        else if (isPausable == true)
         {
-            tokenBS token = new tokenBS(name, symbol, decimals);
+            tokenP token = new tokenP(name, symbol, decimals);
             token.transferOwnership(tokenOwner);
             return address(token);
         }
-        else if (isBurnable == true &&
-                 isPausable == true)
+        else
         {
-            tokenBP token = new tokenBP(name, symbol, decimals);
+            token0 token = new token0(name, symbol, decimals);
             token.transferOwnership(tokenOwner);
             return address(token);
         }
