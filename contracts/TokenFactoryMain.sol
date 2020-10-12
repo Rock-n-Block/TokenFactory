@@ -56,6 +56,21 @@ contract TokenFactoryMain is Ownable
 
     event createdToken(address newToken);
 
+    function changeUsdPrice(uint256 _usdCost) public onlyOwner
+    {
+        usdCost = _usdCost;
+    }
+
+    function changeOracle(IOracle _MedianOracleAddr) public onlyOwner
+    {
+        MedianOracleAddr = _MedianOracleAddr;
+    }
+
+    function changeFeeWallet(address payable _feeWallet) public onlyOwner
+    {
+        feeWallet = _feeWallet;
+    }
+
     function createToken
     (
         string memory name,
